@@ -235,7 +235,6 @@ cv::imwrite("output.jpg", image);  // 保存到当前目录
 
 以下是将编译方法部分改写为 README 学习报告的格式：
 
-```markdown
 
 # 多文件编译：
 
