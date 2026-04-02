@@ -233,4 +233,207 @@ cv::imwrite("output.jpg", image);  // 保存到当前目录
 4. **文档的重要性**：好的文档能节省大量沟通成本
 5. **持续学习**：OpenCV 功能强大，需要不断学习新特性
 
+以下是将编译方法部分改写为 README 学习报告的格式：
 
+```markdown
+
+# 多文件编译：
+
+在实际项目开发中，将代码拆分成多个文件是常见的做法：
+- `main.cpp` - 主程序入口
+- `image_utils.cpp/h` - 图像处理函数
+- `file_io.cpp/h` - 文件操作函数
+
+本报告记录两种编译方法的学习与实践过程。
+
+## 🔧 方法一：直接编译
+
+### 原理说明
+直接编译是最简单的方式，一次性将所有源文件传递给编译器进行编译和链接。
+
+### 编译步骤
+
+**步骤1：创建编译输出目录**
+```bash
+mkdir -p build
+```
+
+**步骤2：执行编译命令**
+```bash
+g++ -g main.cpp image_utils.cpp file_io.cpp -o build/image_processor \
+    -I/usr/include/opencv4 \
+    -lopencv_core \
+    -lopencv_imgproc \
+    -lopencv_imgcodecs \
+    -lopencv_highgui
+```
+
+**步骤3：运行程序**
+```bash
+./build/image_processor
+```
+
+### 命令参数解释
+
+| 参数 | 含义 |
+|------|------|
+| `g++` | C++ 编译器 |
+| `-g` | 生成调试信息，便于 GDB 调试 |
+| `main.cpp image_utils.cpp file_io.cpp` | 要编译的源文件列表 |
+| `-o build/image_processor` | 指定输出可执行文件路径 |
+| `-I/usr/include/opencv4` | 指定头文件搜索路径 |
+| `-lopencv_core` | 链接 OpenCV 核心库 |
+| `-lopencv_imgproc` | 链接 OpenCV 图像处理库 |
+| `-lopencv_imgcodecs` | 链接 OpenCV 图像编解码库 |
+| `-lopencv_highgui` | 链接 OpenCV GUI 库 |
+
+### 优缺点
+- ✅ **简单直观**：一条命令完成所有操作
+- ✅ **无需额外文件**：不需要创建 Makefile 或 CMakeLists.txt
+- ❌ **重复编译**：即使只改了一个文件，也要重新编译所有文件
+- ❌ **容易出错**：手动输入容易遗漏参数
+
+## 🔧 方法二：Makefile 编译
+
+### 原理说明
+Makefile 是一个自动化构建工具，通过定义规则和依赖关系，实现增量编译（只编译修改过的文件）。
+
+### 创建 Makefile 文件
+
+```makefile
+# 编译器和参数
+CXX = g++
+CXXFLAGS = -g -std=c++11
+INCLUDES = -I/usr/include/opencv4
+LIBS = -lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui
+
+# 源文件列表
+SRCS = main.cpp image_utils.cpp file_io.cpp
+
+# 目标文件列表（将.cpp替换为.o）
+OBJS = $(SRCS:.cpp=.o)
+
+# 可执行文件
+TARGET = build/image_processor
+
+# 默认目标
+all: $(TARGET)
+
+# 链接目标文件生成可执行文件
+$(TARGET): $(OBJS)
+	mkdir -p build
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LIBS)
+
+# 编译源文件为目标文件
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+
+# 清理编译文件
+clean:
+	rm -f $(OBJS) $(TARGET)
+	rm -rf build
+
+# 重新编译
+rebuild: clean all
+
+# 运行程序
+run: $(TARGET)
+	./$(TARGET)
+
+# 调试模式
+debug: CXXFLAGS += -DDEBUG
+debug: rebuild
+
+# 帮助信息
+help:
+	@echo "可用命令："
+	@echo "  make       - 编译程序"
+	@echo "  make run   - 编译并运行"
+	@echo "  make clean - 清理编译文件"
+	@echo "  make rebuild - 重新编译"
+	@echo "  make debug - 调试模式编译"
+
+# 声明伪目标
+.PHONY: all clean rebuild run debug help
+```
+
+### Makefile 语法解析
+
+| 语法 | 含义 | 示例 |
+|------|------|------|
+| `=` | 变量赋值 | `CXX = g++` |
+| `:=` | 立即赋值 | `OBJS = $(SRCS:.cpp=.o)` |
+| `$@` | 目标文件名 | `$(TARGET)` |
+| `$^` | 所有依赖文件 | `$(OBJS)` |
+| `$<` | 第一个依赖文件 | `$<` |
+| `%.o: %.cpp` | 模式规则 | 将所有 .cpp 编译为 .o |
+| `.PHONY` | 声明伪目标 | 避免与文件名冲突 |
+
+### 使用命令
+
+```bash
+# 基本使用
+make                # 编译程序
+make run            # 编译并运行
+make clean          # 清理编译文件
+make rebuild        # 重新编译
+make debug          # 调试模式编译
+make help           # 查看帮助
+```
+
+### 运行效果演示
+
+```bash
+$ make
+g++ -g -std=c++11 -I/usr/include/opencv4 -c main.cpp -o main.o
+g++ -g -std=c++11 -I/usr/include/opencv4 -c image_utils.cpp -o image_utils.o
+g++ -g -std=c++11 -I/usr/include/opencv4 -c file_io.cpp -o file_io.o
+mkdir -p build
+g++ -g -std=c++11 main.o image_utils.o file_io.o -o build/image_processor \
+    -lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui
+
+$ make run
+./build/image_processor
+========== 图像基本信息 ==========
+图像宽度: 1920 像素
+图像高度: 1080 像素
+...
+```
+
+### 增量编译演示
+
+```bash
+# 第一次编译：编译所有文件
+$ make
+g++ -c main.cpp -o main.o
+g++ -c image_utils.cpp -o image_utils.o
+g++ -c file_io.cpp -o file_io.o
+g++ main.o image_utils.o file_io.o -o build/image_processor
+
+# 修改 main.cpp 后再次编译：只编译 main.cpp
+$ make
+g++ -c main.cpp -o main.o          # 只有这个被重新编译
+g++ main.o image_utils.o file_io.o -o build/image_processor
+```
+
+### 优缺点
+- ✅ **命令简洁**：只需输入 `make`
+- ✅ **增量编译**：只编译修改过的文件，节省时间
+- ✅ **可复用**：一次编写，永久使用
+- ✅ **标准化**：开源项目广泛使用
+- ❌ **学习曲线**：需要学习 Makefile 语法
+- ❌ **初始配置**：需要编写 Makefile 文件
+- ❌ **调试困难**：出错时定位问题较复杂
+
+
+## 📝 实践练习
+
+### 练习1：直接编译
+1. 创建 `main.cpp`、`utils.cpp`、`utils.h` 三个文件
+2. 使用直接编译命令编译
+3. 运行程序验证结果
+
+### 练习2：Makefile 编译
+1. 创建 Makefile 文件
+2. 定义变量和规则
+3. 测试 `make`、`make clean`、`make run` 命令
