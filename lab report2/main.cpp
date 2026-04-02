@@ -95,9 +95,9 @@ int main() {
                   << (int)pixel << std::endl;
     }
     
-    // 操作2：裁剪图像左上角一块区域（100x100像素）
-    int cropWidth = std::min(100, image.cols);
-    int cropHeight = std::min(100, image.rows);
+    // 操作2：裁剪图像左上角一块区域（300x300像素）
+    int cropWidth = std::min(300, image.cols);
+    int cropHeight = std::min(300, image.rows);
     cv::Rect cropRegion(0, 0, cropWidth, cropHeight);
     cv::Mat croppedImage = image(cropRegion);
     
