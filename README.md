@@ -11,6 +11,7 @@ used to submit computer vision jobs
 | 作业1    | YCbCr下采样与插值实验（第二周理论课）   | ./zuoye1/zuoye1.py     | 
 | 作业2    | 图像增强处理（第三周理论课）   | ./zuoye2/zuoye2.py     | 
 | 实验报告1 | Python视觉开发环境搭建与图像基本读写（第二周实验课） | ./lab report/report1.py | 
+| 实验报告2 |OpenCV环境搭建与c++图像基本读写（第三周实验课） | ./lab report2/main.cpp | 
 
 
 ###在对应的文件夹中有更详细的说明，以下仅作简单介绍
@@ -128,3 +129,67 @@ cv-course/
 3. WSL 环境下图像显示窗口可能无法弹出，可直接查看生成的图片文件
 # cv-course
 计算机视觉 / 数字图像处理基础实验库
+
+以下是简洁版 README.md，适合放在作业文件夹中：
+
+# 实验二
+
+基于 OpenCV 的 C++ 图像处理程序，实现图片读取、灰度转换、裁剪保存等基本操作。
+
+## 文件说明
+
+- `main.cpp` - 主程序源代码
+- `test.shoutao.jpg` - 原始测试图片
+- `gray_image.jpg` - 处理后生成的灰度图
+- `cropped_region.jpg` - 裁剪的左上角区域图片
+- `readme.md` - 本说明文件
+
+## 功能
+
+1. 读取测试图片
+2. 输出图像尺寸、通道数、数据类型等信息
+3. 显示原图、灰度图、裁剪区域
+4. 彩色图转灰度图
+5. 保存灰度图和裁剪区域
+6. 输出中心像素值及图像统计信息
+
+## 编译运行
+
+```bash
+# 编译
+g++ -g main.cpp -o main -I/usr/include/opencv4 \
+    -lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui
+
+# 运行
+./main
+```
+
+## 环境要求
+
+- OpenCV 4.x
+- GCC/G++ 编译器
+
+## 输出
+
+```
+========== 图像基本信息 ==========
+图像宽度 (Width): 960 像素
+图像高度 (Height): 1440 像素
+图像通道数 (Channels): 3
+图像数据类型: CV_8UC3 (8位无符号三通道)
+总像素数: 1382400
+图像大小: 4147200 字节
+===================================
+正在显示原图，按任意键继续...
+已将彩色图转换为灰度图
+正在显示灰度图，按任意键继续...
+灰度图已保存至: C:\Users\Lenovo\Pictures\Camera Roll\test.shoutao_gray.jpg
+
+========== NumPy风格操作 ==========
+中心点 (480, 720) 的像素值 (BGR): 144, 173, 178
+裁剪区域 (300x300 像素) 已保存至: cropped_region.jpg
+灰度图统计信息:
+  均值: 124.215
+  标准差: 57.1146
+===================================
+```
