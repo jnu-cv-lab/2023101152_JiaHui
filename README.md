@@ -11,6 +11,8 @@ used to submit computer vision jobs
 | 作业2    | YCbCr下采样与插值实验（第二周理论课）   | ./zuoye1/zuoye1.py     | 
 | 作业3    | 图像增强处理（第三周理论课）   | ./zuoye2/zuoye2.py     | 
 | 作业4    | DFT&DCT与图像处理关系（第四周理论课）   | ./zuoye 4/zuoye4.py     | 
+| 作业5    |图像局部频率FFT法与空域梯度法对比（第五周理论课）   | ./zuoye5/zuoye5.py     | 
+
 | 实验报告2 | Python视觉开发环境搭建与图像基本读写（第二周实验课） | ./lab report/report1.py | 
 | 实验报告3 |OpenCV环境搭建与c++图像基本读写（第三周实验课） | ./lab report2/main.cpp | 
 | 实验报告4 |图像下采样与恢复（第四周实验课） | ./lab week4/report.py | 
