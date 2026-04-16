@@ -14,6 +14,7 @@ used to submit computer vision jobs
 | 实验报告2 | Python视觉开发环境搭建与图像基本读写（第二周实验课） | ./lab report/report1.py | 
 | 实验报告3 |OpenCV环境搭建与c++图像基本读写（第三周实验课） | ./lab report2/main.cpp | 
 | 实验报告4 |图像下采样与恢复（第四周实验课） | ./lab week4/report.py | 
+| 实验报告5 |下采样抗混叠与自适应滤波实验（第五周实验课） | ./lab week5/lab5.py | 
 
 
 ###在对应的文件夹中有更详细的说明，以下仅作简单介绍
