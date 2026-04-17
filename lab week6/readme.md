@@ -45,6 +45,7 @@ lab6/
 ├── test_document.py     # 倾斜文档透视校正实现
 ├── 6_transform_manual.jpg  # 三类变换效果对比图
 └── 6_document_corrected.jpg # 文档校正效果对比图
+└── readme.md # 实验说明
 ```
 
 ## 实验内容与步骤
