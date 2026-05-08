@@ -18,5 +18,6 @@ used to submit computer vision jobs
 | 实验报告5 |下采样抗混叠与自适应滤波实验（第五周实验课） | ./lab week5/lab5.py | 
 | 实验报告6 |几何变换实验报告（第六周实验课） | ./lab week6 | 
 | 实验报告7 |图像处理特征匹配实验ORB（第七周实验课） | ./lab week7 | 
+| 实验报告9 |传统机器学习方法用于图像分类（第九周实验课） | ./lab week9 | 
 
 
