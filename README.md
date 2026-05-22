@@ -20,5 +20,5 @@ used to submit computer vision jobs
 | 实验报告7 |图像处理特征匹配实验ORB（第七周实验课） | ./lab week7 | 
 | 实验报告9 |传统机器学习方法在手写数字图像分类中的应用（第九周实验课） | ./lab week9 | 
 | 实验报告10 |PyTorch 入门与图像分类（第十周实验课） | ./week10 | 
-
+| 实验报告11 |CNN训练过程与可视化分析（第十一周实验课） | ./week11 | 
 
