@@ -22,3 +22,4 @@ used to submit computer vision jobs
 | 实验报告10 |PyTorch 入门与图像分类（第十周实验课） | ./week10 | 
 | 实验报告11 |CNN训练过程与可视化分析（第十一周实验课） | ./week11 | 
 | 实验报告13 |实现并比较 Sinusoidal Position Encoding 与 RoPE（第十三周实验课） | ./week13 | 
+| 实验报告14 |基于 MediaPipe Pose 与 Skeleton Transformer 的羽毛球动作识别（第十四周实验课） | ./week14 | 
