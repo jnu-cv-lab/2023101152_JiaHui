@@ -23,3 +23,4 @@ used to submit computer vision jobs
 | 实验报告11 |CNN训练过程与可视化分析（第十一周实验课） | ./week11 | 
 | 实验报告13 |实现并比较 Sinusoidal Position Encoding 与 RoPE（第十三周实验课） | ./week13 | 
 | 实验报告14 |基于 MediaPipe Pose 与 Skeleton Transformer 的羽毛球动作识别（第十四周实验课） | ./week14 | 
+| 实验报告16 |相机标定棋盘格（第十六周实验课） | ./week16 | 
