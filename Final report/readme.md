@@ -21,7 +21,7 @@ Python、YOLOv8、InsightFace、OpenCV、Flask、Ngrok、Tkinter
 ## 五、运行方式
 1. 运行人脸训练代码train1.py
 2. 终端开启内网穿透：`ngrok http 8088`
-3. 运行主程序：`python main.py`
+3. 运行主程序：`Code.py`
 4. 点击开始考勤，自动识别人脸签到；也可扫码网页签到。
 5. 结束后可导出考勤结果。
 
